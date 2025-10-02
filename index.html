@@ -1,59 +1,65 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Projet Python - Sphère</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet Python – Sphère (version web)</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f9f9f9;
-      color: #333;
-      text-align: center;
-    }
-    h1 {
-      color: #007acc;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-    }
-    pre {
-      text-align: left;
-      background: #eee;
-      padding: 10px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
+    body { font-family: system-ui, Arial, sans-serif; background:#f7f7f8; color:#222; margin: 0; }
+    header { padding: 28px 16px; background: #0b5fff; color: white; text-align: center; }
+    main { max-width: 720px; margin: 24px auto; padding: 0 16px; }
+    .card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    label { display:block; margin: 8px 0 6px; font-weight: 600; }
+    input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
+    button { margin-top: 12px; padding: 12px 16px; border: 0; border-radius: 10px; font-weight: 700; cursor: pointer; }
+    .primary { background:#0b5fff; color:white; width:100%; }
+    .out { margin-top: 16px; background:#f3f5f7; padding: 14px; border-radius: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;}
+    .muted { color:#555; font-size:14px; }
   </style>
 </head>
 <body>
-  <h1>Projet Python : Calcul d'une Sphère</h1>
-  <div class="card">
-    <p>Ce projet calcule <strong>le volume</strong> et <strong>la surface</strong> d'une sphère en utilisant Python.</p>
-    
-    <h2>Code principal :</h2>
-    <pre>
-import math
+  <header>
+    <h1>Calculateur de sphère</h1>
+    <p class="muted">Version web (HTML + JavaScript) pour GitHub Pages</p>
+  </header>
 
-r = float(input("Rayon de la sphère : "))
-volume = 4/3 * math.pi * r**3
-surface = 4 * math.pi * r**2
+  <main>
+    <div class="card">
+      <label for="rayon">Rayon (en unités quelconques)</label>
+      <input id="rayon" type="number" min="0" step="any" placeholder="ex. 3.5" />
 
-print("Volume :", volume)
-print("Surface :", surface)
-    </pre>
-    
-    <h2>Exécution</h2>
-    <p>Pour lancer le projet :</p>
-    <pre>
-python3 sphere1.py
-    </pre>
-  </div>
+      <button class="primary" id="calc">Calculer</button>
+
+      <div class="out" id="resultats">
+        Entrez un rayon puis cliquez sur <em>Calculer</em>.
+      </div>
+
+      <p class="muted">
+        Formules : Surface = 4·π·r² &nbsp; | &nbsp; Volume = (4/3)·π·r³
+      </p>
+    </div>
+
+    <p class="muted" style="margin-top:16px;">
+      Le script Python d’origine reste dans le dépôt (<code>sphere1.py</code>). GitHub Pages n’exécute pas Python :
+      cette page fait le calcul côté navigateur.
+    </p>
+  </main>
+
+  <script>
+    function fmt(n){ return Number.isFinite(n) ? n.toLocaleString(undefined,{maximumFractionDigits:6}) : "—"; }
+
+    document.getElementById('calc').addEventListener('click', () => {
+      const r = parseFloat(document.getElementById('rayon').value);
+      const out = document.getElementById('resultats');
+      if (!(r > 0)) { out.textContent = "⚠️ Saisis un rayon strictement positif."; return; }
+      const surface = 4 * Math.PI * r * r;
+      const volume  = (4/3) * Math.PI * r * r * r;
+      out.innerHTML = `
+        <div><strong>Rayon</strong> : ${fmt(r)}</div>
+        <div><strong>Surface</strong> : ${fmt(surface)}</div>
+        <div><strong>Volume</strong> : ${fmt(volume)}</div>
+      `;
+    });
+  </script>
 </body>
 </html>
