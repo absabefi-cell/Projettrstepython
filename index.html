@@ -1,14 +1,59 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>Projet Sphere en Python</title>
+  <meta charset="UTF-8">
+  <title>Projet Python - Sphère</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      color: #007acc;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    pre {
+      text-align: left;
+      background: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 <body>
-  <h1>Projet Sphere en Python</h1>
-  <p>Ce projet calcule le volume et la surface d'une sphère en utilisant Python.</p>
-  <pre>
-    # Exemple d'utilisation :
-    python3 sphere1.py
-  </pre>
+  <h1>Projet Python : Calcul d'une Sphère</h1>
+  <div class="card">
+    <p>Ce projet calcule <strong>le volume</strong> et <strong>la surface</strong> d'une sphère en utilisant Python.</p>
+    
+    <h2>Code principal :</h2>
+    <pre>
+import math
+
+r = float(input("Rayon de la sphère : "))
+volume = 4/3 * math.pi * r**3
+surface = 4 * math.pi * r**2
+
+print("Volume :", volume)
+print("Surface :", surface)
+    </pre>
+    
+    <h2>Exécution</h2>
+    <p>Pour lancer le projet :</p>
+    <pre>
+python3 sphere1.py
+    </pre>
+  </div>
 </body>
 </html>
